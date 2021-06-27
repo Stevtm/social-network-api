@@ -2,6 +2,8 @@
 
 This application is an API for a social network built using MongoDB (Mongoose). API routes have been created for managament of User and Thought collections using CRUD operations.
 
+A walkthrough of the API functionality is shown in this video: https://youtu.be/_xk4g-Z7das
+
 The application is build using the following tools & packages:
 
 - Mongoose
