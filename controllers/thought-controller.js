@@ -21,7 +21,7 @@ const thoughtController = {
 			.select("-__v")
 			.then((dbThoughtData) => {
 				if (!dbThoughtData) {
-					res.status(404), json({ message: "No thought found with this id" });
+					res.status(404).json({ message: "No thought found with this id" });
 					return;
 				}
 
@@ -71,27 +71,28 @@ const thoughtController = {
 				}
 
 				// remove the old version of the comment from the User
-				User.findOneAndUpdate(
-					{ _id: params.userId },
-					{ $pull: { thoughts: params.thoughtId } },
-					{ new: true }
-				);
+				// User.findOneAndUpdate(
+				// 	{ _id: params.userId },
+				// 	{ $pull: { thoughts: params.thoughtId } },
+				// 	{ new: true }
+				// );
 
 				// add the new version of the comment to the user
-				return User.findOneAndUpdate(
-					{ _id: params.userId },
-					{ $push: { thoughts: params.thoughtId } },
-					{ new: true }
-				);
+				// return User.findOneAndUpdate(
+				// 	{ _id: params.userId },
+				// 	{ $push: { thoughts: params.thoughtId } },
+				// 	{ new: true }
+				// );
+				res.status(200).json(updatedThought);
 			})
-			.then((dbUserData) => {
-				if (!dbUserData) {
-					res.status(404).json({ message: "No user found with this id" });
-					return;
-				}
+			// .then((dbUserData) => {
+			// 	if (!dbUserData) {
+			// 		res.status(404).json({ message: "No user found with this id" });
+			// 		return;
+			// 	}
 
-				res.status(200).json(dbUserData);
-			})
+			// 	res.status(200).json(dbUserData);
+			// })
 			.catch((err) => {
 				console.log(err);
 				res.status(400).json(err);
@@ -130,3 +131,5 @@ const thoughtController = {
 			});
 	},
 };
+
+module.exports = thoughtController;
