@@ -131,7 +131,47 @@ const thoughtController = {
 			});
 	},
 
-	// create a reaction to a thought
+	// POST create a reaction to a thought
+	addReaction({ params, body }, res) {
+		Thought.findOneAndUpdate(
+			{ _id: params.id },
+			{ $push: { reactions: body } },
+			{ new: true, runValidators: true }
+		)
+			.then((dbThoughtData) => {
+				if (!dbThoughtData) {
+					res.status(404).json({ message: "No thought found with this id" });
+					return;
+				}
+
+				res.status(200).json(dbThoughtData);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.status(400).json(err);
+			});
+	},
+
+	// DELETE a reaction to a thought
+	deleteReaction({ params }, res) {
+		Thought.findOneAndUpdate(
+			{ _id: params.thoughtId },
+			{ $pull: { thoughts: params.reactionId } },
+			{ new: true }
+		)
+			.then((dbThoughtData) => {
+				if (!dbThoughtData) {
+					res.status(404).json({ message: "No thought found with this id" });
+					return;
+				}
+
+				res.status(200).json(dbThoughtData);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.status(400).json(err);
+			});
+	},
 };
 
 module.exports = thoughtController;
