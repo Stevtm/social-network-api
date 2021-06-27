@@ -18,7 +18,6 @@ router.route("/").get(getAllThoughts).post(createThought);
 // /api/thoughts/:id
 //  GET thought by ID
 //  PUT update thought by ID
-//  POST new reaction for thought
 router.route("/:id").get(getThoughtById).put(updateThought);
 
 // /api/thought/:userId/:thoughtId
