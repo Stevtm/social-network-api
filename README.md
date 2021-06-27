@@ -1,6 +1,6 @@
-# Social Network Api
+# Social Network API
 
-This application is an API for a social network built using MongoDB (Mongoose). API routes have been created for managament of users, thoughts, and reactions through CRUD operations.
+This application is an API for a social network built using MongoDB (Mongoose). API routes have been created for managament of User and Thought collections using CRUD operations.
 
 The application is build using the following tools & packages:
 
